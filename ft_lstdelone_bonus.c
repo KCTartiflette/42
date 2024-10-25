@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:33:16 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/23 17:23:56 by pribolzi         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:04:19 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst || !del)
 		return ;
-	del(lst->next);
+	del(lst->content);
 	free (lst);
 }

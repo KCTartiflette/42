@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:05:47 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/22 12:38:16 by pribolzi         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:44:24 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	c2;
 	size_t			i;
 
+	if (n == 0 && !s)
+		return (NULL);
 	i = 0;
 	str = (unsigned char *) s;
 	c2 = (unsigned char) c;
@@ -30,13 +32,12 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	return (0);
 }
 
-/*
-#include <string.h>
+/*#include <string.h>
 #include <stdio.h>
 int	main()
 {
-	unsigned char str[] = "Recurrence";
-	int c = '0';
-	printf("%p\n", ft_memchr(str, c, 10));
-	printf("%p", memchr(str, c, 10));
+	unsigned char *str = NULL;
+	int c = ' ';
+	printf("%p\n", ft_memchr(str, c, 5));
+//	printf("%p", memchr(str, c, 0));
 }*/

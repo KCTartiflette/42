@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 18:07:29 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/25 17:36:38 by pribolzi         ###   ########.fr       */
+/*   Created: 2024/10/24 12:30:31 by pribolzi          #+#    #+#             */
+/*   Updated: 2024/10/24 17:12:42 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void(*del)(void *))
 {
-	unsigned char	*ptr;
-	size_t			i;
+	t_list	*new;
+	t_list	*final;
+	void	*ptr;
 
-	if (nmemb > SIZE_MAX / size)
+	if (!lst || !f || !del)
 		return (NULL);
-	if (nmemb == 0 || size == 0)
-		return (malloc(1));
-	else
-		ptr = malloc(size * nmemb);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < (size * nmemb))
+	final = NULL;
+	while (lst)
 	{
-		ptr[i] = 0;
-		i++;
+		ptr = f(lst->content);
+		new = ft_lstnew(ptr);
+		if (!new)
+		{
+			del(ptr);
+			ft_lstclear(&final, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&final, new);
+		lst = lst->next;
 	}
-	return (ptr);
+	return (final);
 }
 
-/*int	main()
-{
-	calloc(0, 0);
-}*/
+//utiliser un ptr void pour pouvoir free avec del si probleme avec new

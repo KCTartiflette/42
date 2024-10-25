@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:35:08 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/22 20:50:44 by pribolzi         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:22:12 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	src_size;
 
 	i = 0;
-	dst_size = 0;
-	src_size = 0;
+	src_size = ft_strlen(src);
+	if (!dst && size == 0)
+		return (ft_strlen(src));
+	dst_size = ft_strlen(dst);
 	while (*dst != '\0' && dst_size < size)
-	{
-		dst_size++;
 		dst++;
-	}
-	while (src[src_size])
-		src_size++;
 	if (size <= dst_size || size <= 0)
 		return (src_size + size);
 	while (src[i] != '\0' && dst_size + i + 1 < size)
@@ -45,11 +42,11 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 int	main()
 {
-	const char src[] = "bbbb";
-	//char dst[] = "aaaaa";
-	//size_t size;
+	const char *src = "bbbb";
+	char *dst = NULL;
+	size_t size;
 
-	//size = 7;
-	//printf("%zu\n", ft_strlcat (dst, src, size));
-	printf("%zu\n", ft_strlcat (NULL, src, 5));
+	size = 0;
+	//printf("%zu\n", strlcat (dst, src, size));
+	printf("%zu\n", ft_strlcat (dst, src, size));
 }*/

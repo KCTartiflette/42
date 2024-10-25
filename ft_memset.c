@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:10:54 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/21 20:26:10 by pribolzi         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:37:52 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memset(void *s, int c, size_t n)
 	unsigned char	c2;
 	size_t			i;
 
+	if (n == 0 && !s)
+		return (NULL);
 	c2 = (unsigned char) c;
 	dst = (unsigned char *) s;
 	i = 0;
@@ -34,14 +36,15 @@ void	*ft_memset(void *s, int c, size_t n)
 
 int main(void)
 {
-	char str[50] = "Bonjour, voici une chaîne de test !";
-	char str2[50] = "Bonjour, voici une chaîne de test !";
+	char *str = NULL;
+	char *str2 = NULL;
+	size_t n = 1;
 
 	
-	printf("Avant memset : %s\n", str);
+	//printf("Avant memset : %s\n", str);
 
-	ft_memset(str, 'A', 7);
-	memset(str2, 'A', 7);
+	ft_memset(str, 'A', n);
+	//memset(str2, 'A', n);
 	printf("Après memset : %s\n", str);
-	printf("Vraie fonction : %s", str2);
+	//printf("Vraie fonction : %s", str2);
 }*/

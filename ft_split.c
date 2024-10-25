@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:38:39 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/23 12:10:38 by pribolzi         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:38:53 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,44 +57,69 @@ static void	*res_free(char **final)
 	return (NULL);
 }
 
+static char	*fill_word(char const *s, char c)
+{
+	char	*word;
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen_mod(s, c);
+	word = malloc(sizeof(char) * (len + 1));
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (*s && *s != c)
+	{
+		word[i] = *s++;
+		i++;
+	}
+	word[i] = '\0';
+	return (word);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**final;
-	size_t	j;
 	size_t	k;
 
+	if (!s)
+		return (NULL);
 	final = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!final)
 		return (NULL);
 	k = 0;
 	while (*s)
 	{
-		j = 0;
 		while (*s == c)
 			s++;
-		if (*s != c && *s != '\0')
+		if (*s && *s != c)
 		{
-			final[k] = malloc(sizeof(char) * ft_strlen_mod(s, c) + 1);
+			final[k] = fill_word(s, c);
+			while (*s && *s != c)
+				s++;
 			if (!final[k])
 				return (res_free(final));
-			while (*s && *s != c)
-				final[k][j++] = *s++;
-			final[k++][j] = '\0';
+			k++;
 		}
 	}
 	final[k] = NULL;
 	return (final);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int main()
 {
-    char const s[] = "Hello! fet erter er";
+    char const *s = NULL;
     char c = ' ';
     char **final = ft_split(s, c);
     int i = 0;
 
+	if (!s)
+		{
+			printf("S = NULL\n");
+			return (0);
+		}	
     while (final[i])
     {
         printf("%s\n", final[i]);
@@ -110,4 +135,4 @@ int main()
     free(final);
 
     return (0);
-}*/
+}

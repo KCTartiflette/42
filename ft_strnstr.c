@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:37:46 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/21 20:26:53 by pribolzi         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:03:31 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	j;
 
 	i = 0;
+	if (!big && len == 0)
+		return (NULL);
 	if (little[0] == '\0')
 		return ((char *)big);
 	while (big[i] != '\0' && i < len)

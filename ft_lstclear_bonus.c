@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 18:07:29 by pribolzi          #+#    #+#             */
-/*   Updated: 2024/10/25 17:36:38 by pribolzi         ###   ########.fr       */
+/*   Created: 2024/10/24 11:06:38 by pribolzi          #+#    #+#             */
+/*   Updated: 2024/10/24 17:39:53 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	unsigned char	*ptr;
-	size_t			i;
+	t_list	*temp;
+	t_list	*suite;
 
-	if (nmemb > SIZE_MAX / size)
-		return (NULL);
-	if (nmemb == 0 || size == 0)
-		return (malloc(1));
-	else
-		ptr = malloc(size * nmemb);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < (size * nmemb))
+	if (!lst || !del)
+		return ;
+	temp = *lst;
+	while (temp)
 	{
-		ptr[i] = 0;
-		i++;
+		suite = temp->next;
+		del(temp->content);
+		free (temp);
+		temp = suite;
 	}
-	return (ptr);
+	*lst = NULL;
 }
-
-/*int	main()
-{
-	calloc(0, 0);
-}*/

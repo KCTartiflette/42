@@ -11,7 +11,7 @@ SRC = ft_isalnum.c ft_isprint.c ft_memcpy.c ft_putendl_fd.c ft_strchr.c ft_strlc
 OBJS = $(SRC:.c=.o)
 
 SRC_bonus = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c\
-			ft_lstdelone_bonus.c
+			ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c\
 
 OBJS_bonus = $(SRC_bonus:.c=.o)
 
@@ -35,6 +35,10 @@ bonus: $(OBJS) $(OBJS_bonus)
 	$(CC) $(FLAGS) -c $(SRC_bonus)
 	ar rc $(NAME) $(OBJS) $(OBJS_bonus)
 	ranlib $(NAME)
+
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(SRC_bonus)
+	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_bonus)
 
 clean:
 	rm -rf $(OBJS) $(OBJS_bonus)
